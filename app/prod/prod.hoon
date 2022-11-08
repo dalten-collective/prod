@@ -34,6 +34,7 @@
     ;html
       ;head
         ;title:"%prod (not a test)"
+        ;style:"{(trip style)}"
         ;meta
           =name     "viewport"
           =charset  "utf-8"
@@ -42,12 +43,25 @@
     ::
       ;body
         ;div(class "container")
+          ;div(class "response-container")
+            ;+  ?~  msgs  :/""
+                ?:  gud.u.msgs
+                  ;div#status.green:"{(trip txt.u.msgs)}"
+                ;div#status.red:"{(trip txt.u.msgs)}"
+          ==
+        ::
+          ;div(class "instructions-container")
+            ;p:"Attach some message in a chat, and write \"!remind-me <some @dr>\""
+            ;p:"E.g. \"!remind-me ~d20\" and an attachment would produce a reminder in 20 days"
+          ==
+        ::
           ;div(class "kick-container")
             ;form(method "post")
               ;input(name "act", value "kick", style "display: none;");
               ;button:"Kick Me 🦶"
             ==
           ==
+        ::
           ;div(class "reminder-container")
             ;+  ?~   flg
                   ;table
@@ -59,11 +73,29 @@
                   ::
                     ;*  (chats:make ~(key by tac))
                   ==
-                ;p:"fail"
+                ;table
+                  ;tr
+                    ;th:"delete"
+                    ;th:"due date"
+                    ;th:"link"
+                  ==
+                ::
+                  ;*  (minds:make (~(got by tac) u.flg))
+                ==
           ==
         ==
       ==
     ==
+  ++  style
+    '''
+    * { margin: 0.2em; padding: 0.2em; font-amily: monospace; }
+    .red {
+      color: red;
+    }
+    .green {
+      color: green;
+    }
+    '''
   ++  make
     |%
     ++  chats
@@ -77,9 +109,32 @@
         ;td:"{(scow %tas q)}"
         ;td
           ;a(href "./prod?flag={(scow %p p)}_{(scow %tas q)}")
-            ;p:"test"
+            ;p:"see reminders"
           ==
         ==
+      ==
+    ++  minds
+      |=  doz=(set (pair @da (pair ship time)))
+      ^-  marl
+      =+  hos=(scow %p p:(need flg))
+      =+  cha=(scow %tas q:(need flg))
+      =/  next
+        |=([a=[@da *] b=[@da *]] (gth -.a -.b))
+      %+  turn  (sort ~(tap in doz) next)
+      |=  (pair @da (pair ship time))
+      ^-  manx
+      ;tr
+        ;td
+          ;form(method "post")
+            ;input(name "act", value "drop", style "display: none;");
+            ;input(name "host", value "{hos}", style "display: none;");
+            ;input(name "chat", value "{cha}", style "display: none;");
+            ;input(name "time", value "{(scow %da p)}", style "display:none;");
+            ;button:"Remove Reminder 🚫"
+          ==
+        ==
+        ;td:"{(scow %da p)}"
+        ;td:"/1/chan/chat/{hos}/{cha}/msg/{(scow %p p.q)}/{(scow %ud q.q)}"
       ==
     --
   --

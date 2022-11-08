@@ -67,27 +67,28 @@
     ^-  (quip card _this)
     ?.  ?=(%handle-http-request mar)  `this
     =^  cards  state
-      =;  out=(quip card tack)
-        [-.out [%0 +.out]]
-      %.  [bowl !<(order:r vaz) about]
-      %:  (steer:r tack ^poke)
-        pages
-      ::
-        |=  =trail:r
-        ^-  (unit place:r)
-        ?~  site=(decap:r /apps/prod site.trail)  ~
-        ?+  u.site  ~
-          ~       `[%page [& %prod]]
-          [%$ ~]  `[%away /apps/prod]
-        ==
-      ::
-        |=  =order:r
-        ^-  [[(unit reply:r) (list card)] tack]
-        =;  msg=@t  [[`code+[404 msg] ~] about]
-        (rap 3 ~['%prod page ' url.request.order ' not found.'])
-      ::
-        skip:eng
-      ==
+      abet:(poke:eng mar vaz)
+      :: =;  out=(quip card tack)
+      ::   [-.out [%0 +.out]]
+      :: %.  [bowl !<(order:r vaz) about]
+      :: %:  (steer:r tack ^poke)
+      ::   pages
+      :: ::
+      ::   |=  =trail:r
+      ::   ^-  (unit place:r)
+      ::   ?~  site=(decap:r /apps/prod site.trail)  ~
+      ::   ?+  u.site  ~
+      ::     ~       `[%page [& %prod]]
+      ::     [%$ ~]  `[%away /apps/prod]
+      ::   ==
+      :: ::
+      ::   |=  =order:r
+      ::   ^-  [[(unit reply:r) (list card)] tack]
+      ::   =;  msg=@t  [[`code+[404 msg] ~] about]
+      ::   (rap 3 ~['%prod page ' url.request.order ' not found.'])
+      :: ::
+      ::   skip:eng
+      :: ==
     [cards this]
   ::
   ++  on-peek
@@ -131,19 +132,27 @@
     cha  [our.bol %chat]
 ++  emit  |=(=card dat(dek [card dek]))
 ++  emil  |=(lac=(list card) dat(dek (welp lac dek)))
+++  abet
+  ^-  (quip card _state)
+  [(flop dek) state]
+::
 ++  eyre
   %-  emit
   =-  [%pass /eyre/connect %arvo %e -]
   [%connect [[~ [%apps %prod ~]] dap.bol]]
+::
 ++  hear
   %-  emit
   [%pass /chats %agent [our.bol %chat] %watch /briefs]
-++  abet
-  ^-  (quip card _state)
-  [(flop dek) state]
+::
 ++  init
   ^+  dat
   eyre:hear
+::
+++  peer
+  |=  =path
+  ?:  ?=([%http-response *] pat)  dat
+  ~|(bad-peer-path/path !!)
 ::
 ++  load
   |=  vaz=vase
@@ -151,10 +160,6 @@
   ?>  ?=([%0 *] q.vaz)
   =.  state  !<(state-0 vaz)
   eyre
-::
-++  peer
-  |=  =path
-  ?:(?=([%http-response *] pat) dat ~|(bad-peer-path/path !!))
 ::
 ++  skip
   |=  act=^poke
@@ -183,7 +188,7 @@
   ?+    mar  ~|(bad-mark-poke/mar !!)
       %handle-http-request
     =;  out=(quip card tack)
-      (emil(about +.out) -.out)
+      (emil(about +.out) (flop -.out))
     %.  [bol !<(order:r vaz) about]
     %:  (steer:r tack ^poke)
       pages
@@ -230,7 +235,7 @@
       :-  [our.bol now.bol]
       :^  %add  ~  our.bol
       :-  now.bol
-      [%story [cite+cit]~ ~['reminder!' break+~]]       :: XX: ship+our.bol when ready
+      [%story [cite+cit]~ ~['reminder!' break+~]]       :: XX: ship+our.bol wen?
     =.  about
       (~(del ju about) [host chat] [now [who wen]])
     =?    about
@@ -266,7 +271,7 @@
         %watch-ack
       %.  dat
       ?~  p.sig  same
-      %-  slog                                          :: XX: and clean groups?
+      %-  slog                                          :: XX: and clean about?
       :_  u.p.sig
       leaf/"%prod can't see chat - [%kick ~] to retry"
     ==
