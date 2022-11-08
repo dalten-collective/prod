@@ -68,27 +68,6 @@
     ?.  ?=(%handle-http-request mar)  `this
     =^  cards  state
       abet:(poke:eng mar vaz)
-      :: =;  out=(quip card tack)
-      ::   [-.out [%0 +.out]]
-      :: %.  [bowl !<(order:r vaz) about]
-      :: %:  (steer:r tack ^poke)
-      ::   pages
-      :: ::
-      ::   |=  =trail:r
-      ::   ^-  (unit place:r)
-      ::   ?~  site=(decap:r /apps/prod site.trail)  ~
-      ::   ?+  u.site  ~
-      ::     ~       `[%page [& %prod]]
-      ::     [%$ ~]  `[%away /apps/prod]
-      ::   ==
-      :: ::
-      ::   |=  =order:r
-      ::   ^-  [[(unit reply:r) (list card)] tack]
-      ::   =;  msg=@t  [[`code+[404 msg] ~] about]
-      ::   (rap 3 ~['%prod page ' url.request.order ' not found.'])
-      :: ::
-      ::   skip:eng
-      :: ==
     [cards this]
   ::
   ++  on-peek
