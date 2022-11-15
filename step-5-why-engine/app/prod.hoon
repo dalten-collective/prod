@@ -1,11 +1,14 @@
-/-  c=chat
+/-  *prod, c=chat
 /+  verb, dbug, default-agent
 ::
 |%
 ::
 +$  versioned-state  $%(state-0)
 ::
-+$  state-0  [%0 ~]
++$  state-0
+  $:  %0
+      about=tack
+  ==
 ::
 ::
 ::  boilerplate
@@ -146,6 +149,34 @@
       ::
     ==
   ==
+::  +arvo: handles on-arvo
+::
+++  arvo
+  |=  [pol=(pole knot) sig=sign-arvo]
+  ^+  dat
+  dat
+  :: ?+    pol  ~|(bad-arvo-wire/pol !!)
+  ::     [%when now=@ %flag host=@ chat=@ %mention who=@ wen=@ ~]
+  ::   ?>  ?=([%behn %wake *] sig)
+  ::   =+  now=`@da`(slav %da now.pol)
+  ::   =+  host=`@p`(slav %p host.pol)
+  ::   =+  chat=`@tas`(slav %tas chat.pol)
+  ::   =+  who=`@p`(slav %p who.pol)
+  ::   =+  wen=`@da`(slav %da wen.pol)
+  ::   =/  cit=cite:c
+  ::     :+  %chan  [%chat [host chat]]
+  ::     /msg/[who.pol]/(scot %ud wen)
+  ::   =/  act=action:c
+  ::     :^  [host chat]  now.bol  %writs
+  ::     :-  [our.bol now.bol]
+  ::     :^  %add  ~  our.bol
+  ::     :-  now.bol
+  ::     [%story [cite+cit]~ ~['reminder!' break+~]]       :: XX: ship+our.bol wen?
+  ::   =.  about
+  ::     (~(del ju about) [host chat] [now [who wen]])
+  ::   %-  emit
+  ::   [%pass /reminder %agent cha %poke chat-action+!>(act)]
+  :: ==
 ::  +bl: a blab engine
 ::
 ++  bl
@@ -212,39 +243,4 @@
     ::   blab(wen ``@da`(add now.bol +>.u.wat))
     :: ;~((glue ace) (jest '!remind-me') ;~(pfix sig crub:so))
   --
-::  +arvo: handles on-arvo
-++  arvo
-  |=  [pol=(pole knot) sig=sign-arvo]
-  ^+  dat
-  ?+    pol  ~|(bad-arvo-wire/pol !!)
-      [%eyre %connect ~]
-    ?>  ?=([%eyre %bound *] sig)
-    %.  dat
-    ?:  accepted.sig  same
-    (slog leaf/"%prod can't bind eyre - [%kick ~] to retry" ~)
-  ::
-      [%when now=@ %flag host=@ chat=@ %mention who=@ wen=@ ~]
-    ?>  ?=([%behn %wake *] sig)
-    =+  now=`@da`(slav %da now.pol)
-    =+  host=`@p`(slav %p host.pol)
-    =+  chat=`@tas`(slav %tas chat.pol)
-    =+  who=`@p`(slav %p who.pol)
-    =+  wen=`@da`(slav %da wen.pol)
-    =/  cit=cite:c
-      :+  %chan  [%chat [host chat]]
-      /msg/[who.pol]/(scot %ud wen)
-    =/  act=action:c
-      :^  [host chat]  now.bol  %writs
-      :-  [our.bol now.bol]
-      :^  %add  ~  our.bol
-      :-  now.bol
-      [%story [cite+cit]~ ~['reminder!' break+~]]       :: XX: ship+our.bol wen?
-    =.  about
-      (~(del ju about) [host chat] [now [who wen]])
-    =?    about
-        ?=(~ (~(got by about) [host chat]))
-      (~(del by about) [host chat])
-    %-  emit
-    [%pass /reminder %agent cha %poke chat-action+!>(act)]
-  ==
 --
