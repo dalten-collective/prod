@@ -109,7 +109,7 @@
   ^+  dat
   ?>  ?=([%0 *] q.vaz)
   dat(state !<(state-0 vaz))
-::  +dude: nothing has changed
+::  +dude: handles on-agent (agents are dudes)
 ::
 ++  dude
   |=  [pol=(pole knot) sig=sign:agent:gall]
