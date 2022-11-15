@@ -215,9 +215,6 @@
       [%story [cite+cit]~ ~['reminder!' break+~]]       :: XX: ship+our.bol wen?
     =.  about
       (~(del ju about) [host chat] [now [who wen]])
-    =?    about
-        ?=(~ (~(got by about) [host chat]))
-      (~(del by about) [host chat])
     %-  emit
     [%pass /reminder %agent cha %poke chat-action+!>(act)]
   ==
