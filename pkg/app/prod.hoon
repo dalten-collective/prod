@@ -115,14 +115,12 @@
   ^-  (quip card _state)
   [(flop dek) state]
 ::
+++  hear  (emit [%pass /chats %agent cha %watch /briefs])
+::
 ++  eyre
   %-  emit
   =-  [%pass /eyre/connect %arvo %e -]
   [%connect [[~ [%apps %prod ~]] dap.bol]]
-::
-++  hear
-  %-  emit
-  [%pass /chats %agent [our.bol %chat] %watch /briefs]
 ::
 ++  init
   ^+  dat
